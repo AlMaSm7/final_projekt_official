@@ -34,7 +34,7 @@ var storage = multer.diskStorage({
     //console.log(ffmpeg.ffprobe)
     if (file.mimetype == 'video/mp4' || file.mimetype == 'video/mpeg') {
       file_path = file_name
-      full_path = 'C:\\work\\ZLI\\Back_up2\\final_projekt_official\\src\\assets\\VIDEOS\\' + file_name
+      full_path = 'C:\\work\\ZLI\\Back_up2\\final_projekt_official\\videoshare\\src\\assets\\VIDEOS\\' + file_name
       console.log(file_path)
       console.log('UPLOAD NOW')
     } else if (file.mimetype == 'image/jpeg' || file.mimetype == 'image/tiff' || file.mimetype == 'image/png') {

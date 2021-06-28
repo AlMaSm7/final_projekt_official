@@ -17,6 +17,7 @@
     "es6-promise": "^4.2.8",
     "secure-ls": "^1.2.6",
     "vue": "^2.6.11",
+    "vue-async-computed": "^3.9.0",
     "vue-cookies": "^1.7.4",
     "vue-crypt": "^1.0.0",
     "vue-cryptojs": "^2.1.5",
