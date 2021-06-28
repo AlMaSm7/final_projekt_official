@@ -1,0 +1,39 @@
+version: "3.1"
+
+services:
+
+
+    application:
+      image: debian:jessie
+      container_name: Datube
+      entrypoint: /bin/bash
+      stdin_open: true # docker run -i
+      tty: true        # docker run -t
+      volumes:
+        - ./application/html:/var/www/html
+        - ./application/data:/var/lib/mysql
+
+    mariadb:
+      image: mariadb:10.4
+      container_name: mariadb-videosharing_platform
+      restart: always
+      depends_on:
+        - application
+      environment:
+        - MYSQL_ROOT_PASSWORD=videoshare_dababy
+        - MYSQL_DATABASE=videoshare
+        - MYSQL_USER=dababy
+        - MYSQL_PASSWORD=videoshare_norights
+      ports:
+        - "8086:3306"
+      volumes_from:
+        - application
+
+    phpmyadmin:
+      image: phpmyadmin
+      restart: always
+      ports:
+        - "8081:80"
+      environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOST=mariadb
