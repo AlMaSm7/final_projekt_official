@@ -1,6 +1,6 @@
 <template>
     <div class="user_container">
-        <h1>Username: {{infos[0].username}}</h1>
+        <h2>Username: {{infos[0].username}}</h2>
         <p>Firstname: {{infos[0].firstname}}</p>
         <p>Lastname: {{infos[0].lastname}}</p>
         <p>Email: {{infos[0].email}}</p>

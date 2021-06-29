@@ -1,5 +1,7 @@
 <template>
-  <div id="register">
+  <div class="content_register">
+  <div class="register">
+  <h2>Register</h2>
     <input type="text" placeholder="Username..." v-model="username" required />
     <input
       type="text"
@@ -16,6 +18,7 @@
       required
     />
     <button @click="register()" type="submit" value="submit">Submit</button>
+  </div>
   </div>
 </template>
 <script>
@@ -69,3 +72,52 @@ export default {
   },
 }
 </script>
+<style>
+  .register > h2 {
+    font-size: 60px;
+  }
+  .content_register{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center ;
+    width: 100vw;
+    height: 45vh;
+  }
+  .register{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 25px;
+  }
+  .register > button{
+    background-color: black;
+    color: rgb(167, 167, 167);
+    border: none;
+    border-radius: 4px;
+    transition: 0.7s;
+    width: 200px;
+    height: 35px;
+  }
+  .register >input{
+    background-color: rgb(31, 31, 31);
+    border-radius: 5px;
+    border: none;   
+    margin-left: 100px;
+    margin-right: 100px;
+    width: 500px;
+    height: 40px;
+    color: rgb(167, 167, 167);
+  }
+  .register > input:focus{
+    color: rgb(167, 167, 167);
+    outline: none !important;
+    border:1px solid rgb(46, 129, 43);
+    box-shadow: 0 0 10px #719ECE;
+  }
+  .register > button:hover{
+    color: rgb(221, 221, 221);
+    background-color: rgb(46, 129, 43);
+  }
+</style>

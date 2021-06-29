@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <h1>My Videos</h1>
+        <h2>My Videos</h2>
         <div v-for="video in my_videos" :key="video" @click="showVideo(video.id)">
             <img :src='require(`../assets/VIDEOS/${video.thumbnail}`)' class="thumbnail"/><br>
             <p>{{video.title}}</p><br>

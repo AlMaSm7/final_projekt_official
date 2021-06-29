@@ -286,8 +286,8 @@ router.post('/getVideo', (req, res) => {
 })
 
 router.post('/getComments', (req, res) => {
-  let query = 'SELECT comments.text, users.username, comments.time FROM comments INNER JOIN users ON comments.users_id_fs = users.user_id WHERE comments.videos_id_fs = ' + con.escape(req.body.id) + ';'
-  //console.log(query)
+  let query = 'SELECT comments.text, users.username, comments.time FROM comments INNER JOIN users ON comments.users_id_fs = users.user_id WHERE comments.videos_id_fs = ' + con.escape(req.body.id) + ' ORDER BY comments.time DESC;'
+  console.log(query)
   con.query(query, (error, results, fields) => {
     if (error) {
       console.log(error)
@@ -297,7 +297,7 @@ router.post('/getComments', (req, res) => {
   })
 })
 router.post('/numbers', (req, res) => {
-  let query = 'SELECT likes, dislikes, views FROM videos WHERE videos_id = ' + con.escape(req.body.id) + ';'
+  let query = 'SELECT likes, dislikes, views, time FROM videos WHERE videos_id = ' + con.escape(req.body.id) + ';'
   con.query(query, (error, results, fields) => {
     if (error) {
       console.log(error)
@@ -308,7 +308,7 @@ router.post('/numbers', (req, res) => {
   })
 })
 app.get('/top5', (req, res) => {
-  let query = 'SELECT * FROM videos ORDER BY views LIMIT 5'
+  let query = 'SELECT * FROM videos ORDER BY views desc LIMIT 5'
   con.query(query, (error, results, fields) => {
     if (error) {
       console.log(error)
@@ -331,7 +331,7 @@ router.post('/getUserVideos', (req, res) => {
   })
 })
 router.post('/likedVideos', (req, res) => {
-  let query = 'SELECT videos.path, videos.thumbnail, videos.length, videos.views, videos.video_id FROM videos INNER JOIN liked_dislike ON liked_dislike.videos_id_fs = videos.videos_id INNER JOIN users ON liked_dislike.users_id_fs = users.user_id WHERE users.user_id = ' + con.escape(req.body.id) +' AND liked IS NOT NULL;'
+  let query = 'SELECT videos.path, videos.thumbnail, videos.length, videos.views, videos.videos_id FROM videos INNER JOIN liked_dislike ON liked_dislike.videos_id_fs = videos.videos_id INNER JOIN users ON liked_dislike.users_id_fs = users.user_id WHERE users.user_id =' + con.escape(req.body.id) +' AND liked IS NOT NULL;'
   console.log(query)
   con.query(query, (error, results, fields) => {
     if (error) {

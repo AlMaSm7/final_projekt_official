@@ -1,23 +1,19 @@
 <template>
   <div id="app">
-    <login v-if="!user_here" />
-    <register v-if="!user_here" />
+    <login-register v-if="!user_here"/>
     <home v-if="user_here && !watchvideo && !acc" />
     <player v-if="watchvideo" />
     <userInfo v-if="acc"/>
-    <upload/>
   </div>
 </template>
 
 <script>
 import Vue from "vue";
 
-import Register from "./components/register.vue";
-import login from "./components/login.vue";
+import loginRegister from "./components/registerLogin.vue";
 import home from "./components/home.vue";
 import player from "./components/player.vue";
 import userInfo from "./components/user.vue"
-import upload from './components/upload.vue'
 
 import { uuid } from "vue-uuid";
 import store from "./store";
@@ -28,12 +24,10 @@ Vue.use(uuid);
 export default {
   name: "App",
   components: {
-    login,
-    Register,
+    loginRegister,
     home,
     player,
-    userInfo,
-    upload
+    userInfo
   },
   data() {
     return {
@@ -92,7 +86,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: rgb(225, 225, 225);
-  margin-top: 60px;
 }
 body {
   background-color: rgb(50, 50, 50);

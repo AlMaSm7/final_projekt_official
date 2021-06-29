@@ -1,9 +1,15 @@
 <template>
     <div class="container">
-        <img src="../assets/logo_white_large.png" @click="goToAcc()" height="100px" width="100px" class="user">
-        <div v-for="foto in thumbnails" :key="foto" @click="showVideo(foto.id)">
-            <img :src='require(`../assets/VIDEOS/${foto.thumbnail}`)' class="thumbnail"/><br>
-            <p>{{foto.title}}</p>
+        <div class="logo">
+            <img src="../assets/logo_white_large.png" @click="goToAcc()" class="user">
+        </div>
+        <div class="thumbnails">
+            <div v-for="foto in thumbnails" :key="foto" @click="showVideo(foto.id)">
+                <figure>
+                    <img :src='require(`../assets/VIDEOS/${foto.thumbnail}`)' class="thumbnail"/><br>
+                    <figcaption>{{foto.title}}</figcaption>
+                </figure>
+            </div>
         </div>
     </div>
 </template>
@@ -64,8 +70,29 @@ export default {
         width: 300px;
         height: 200px;
         cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-content: space-between;
+        flex-flow: row wrap;
     }
     .user:hover{
         cursor: pointer;
+    }
+    .logo{
+        display: flex;
+        margin-bottom: 50px;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .logo > img{
+        height: 155px;
+        width: 140px;
+    }
+    .thumbnails{
+        display: flex;
+        flex-direction: row;
+        flex-flow: row wrap;
+        gap: 69px;
     }
 </style>

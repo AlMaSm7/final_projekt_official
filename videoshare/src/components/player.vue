@@ -5,15 +5,20 @@
         </div>
         <div class="video_player">
             <video :src="require(`../assets/VIDEOS/${video_src}`)" controls autoplay muted></video>
-            <div class="top5" v-for="trending in trending_videos" :key="trending">
-                <img :src='require(`../assets/VIDEOS/${trending.thumbnail}`)' class="thumbnail"/><br>
-                <p>{{trending.title}}</p>
-                <p>{{trending.views}}</p>
-                <p>{{trending.length}}</p>
+            <div class="top5">
+                <div class="top5" v-for="trending in trending_videos" :key="trending">
+                    <figure>
+                        <img :src='require(`../assets/VIDEOS/${trending.thumbnail}`)' class="thumbnail" @click="showVideo(trending.id)"/><br>
+                        <p>{{trending.title}}</p>
+                        <p>Views: {{trending.views}}</p>
+                        <p>{{trending.length}}</p>
+                    </figure>
+                </div>
             </div>
         </div>
         <div class="content">
             <p class="title">{{title}}</p>
+            <small>{{media_numbers[0].time}}</small>
             <p class="views">Views: {{media_numbers[0].views}}</p>
             <font-awesome-icon :icon="['fas', 'thumbs-up']" size="2x" class="like" @click="like(id, user_id)"/>
             <p class="like_text">{{media_numbers[0].likes}} Likes</p>
@@ -23,7 +28,7 @@
             <font-awesome-icon :icon="['fas', 'paper-plane']" size="2x" class="like" @click="handle_comment(id, user_id)"/>
         </div>
         <div v-for="comment in all_comments" :key="comment" class="comments">
-            <p><b>Comment from {{comment.username}}:</b> {{comment.text}}</p>
+            <p><b>Comment from {{comment.username}} at: </b> <small>{{comment.time}}</small>: {{comment.text}}</p>
         </div>
     </div>
 </template>
@@ -49,6 +54,19 @@ export default {
         leave: function leave(){
             store.commit('setNull')
         },
+        showVideo: function showVideo(id){
+            console.log("here")
+            console.log(id)
+            axios.post("http://localhost:3000/getVideo", {
+                id
+            }).then((Response) => {
+                console.log(Response.data)
+                this.watch = true
+                store.commit('showVideo',  {video: Response.data[0].path, title: Response.data[0].title, watch: true, video_id: id})
+            }).catch((err) => {
+                console.log(err)
+            })
+        },
         handle_comment: function handle_comment(id, user_id){
             const {comment} = this;
             axios.post('http://localhost:3000/comment', {
@@ -56,6 +74,7 @@ export default {
                 user_id,
                 comment
             }).then((res) => {
+                this.comment = ""
                 console.log(res.data)
                 this.getComments(id)
             }).catch((err) => {
@@ -70,7 +89,7 @@ export default {
                 console.log(this.all_comments)
                 this.all_comments.length = 0
                 Response.data.forEach(element => {
-                    this.all_comments.push({"text": element.text, "username": element.username, time: element.time})
+                    this.all_comments.push({"text": element.text, "username": element.username, "time": new Date(element.time)})
                 })
                 console.log(this.all_comments)
             }).catch((err) => {
@@ -81,7 +100,7 @@ export default {
             axios.post('http://localhost:3000/numbers',{id}).then((Response) => {
                 console.log(Response.data)
                 Response.data.forEach(element => {
-                    this.media_numbers.push({"views": element.views, "likes": element.likes})
+                    this.media_numbers.push({"views": element.views, "likes": element.likes, "time": new Date(element.time)})
                     this.likes = element.likes
                 })
                 console.log(this.media_numbers)
@@ -103,13 +122,13 @@ export default {
         trending: function trending(){
             axios.get('http://localhost:3000/top5').then((Response) => {
                 console.log(Response.data)
-                let time = this.calculateTime()
                 Response.data.forEach(element => {
-                    this.trending_videos.push({"thumbnail": element.thumbnail, "title": element.title, "id": element.videos_id,"views": element.views, "length": time})
+                    this.trending_videos.push({"thumbnail": element.thumbnail, "title": element.title, "id": element.videos_id,"views": element.views})
                 })
+                console.log(this.trending_videos)
             })
         },
-        calculateTime: function calculateTime(time){
+        /*calculateTime: function calculateTime(time){
             let minutes = Math.floor(time / 60)
             let seconds = Math.floor(time % 60)
             if (seconds < 10) {
@@ -117,7 +136,7 @@ export default {
             }   
             let final_time = minutes + ':' + seconds
             return final_time
-        }
+        }*/
     },
     beforeMount() {
         this.video_src = store.state.video
@@ -130,11 +149,15 @@ export default {
             console.log(err)
         })
         this.loadnums(this.id)
+        this.trending()
     },
 }
 </script>
 
 <style>
+    small{
+        font-size: 12px;
+    }
     .like{
         cursor: pointer;
         color: rgb(143, 143, 143);
@@ -233,6 +256,18 @@ export default {
         flex-direction: row;
         justify-content: flex-start;
         margin-left: 100px;
+    }
+    .top5{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .top5 > figure > p{
+        font-size: 14px;
+    }
+    .top5 > figure > img{
+        width: 250px;
+        height: 150px;
     }
 
 
