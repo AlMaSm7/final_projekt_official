@@ -38,6 +38,11 @@ export default new Vuex.Store({
             console.log(state)
             state.key = null
             state.username = null
+            state.watch_video = null
+            state.video = null
+            state.video_id = null
+            state.acc = null
+            state.title = null
         },
         showVideo(state, data) {
             console.log(data.video)

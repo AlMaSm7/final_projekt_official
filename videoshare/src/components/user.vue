@@ -3,6 +3,9 @@
         <div class="logo">
             <img src="../assets/logo_white_large.png" @click="goHome()" height="140px" width="100px" class="user">
         </div>
+        <div class="logout">
+            <font-awesome-icon :icon="['fas', 'sign-out-alt']" size="3x" class="logout" @click="logout()"/>
+        </div>
         <div class="nav">
             <nav class="navigation">
                 <ul @click="change()">User Info</ul>
@@ -26,6 +29,7 @@ import user_info from "./user_info.vue"
 import likedVideos from './likedVideos.vue'
 import store from '../store'
 import upload from './upload.vue'
+import Vue from 'vue'
 
 export default {
     components: {
@@ -86,8 +90,11 @@ export default {
         },
         goHome: function goHome(){
             store.commit('navigateHome')
+        },
+        logout: function logout(){
+            Vue.$cookies.remove(store.state.username)
+            store.commit('logout')
         }
-
     }
 }
 </script>
@@ -113,6 +120,13 @@ export default {
         display: flex;
         align-items: flex-start;
         flex-direction: column;
+    }
+    .logout{
+        color: rgb(122, 122, 122);
+        transition: 0.7s;
+    }
+    .logout:hover{
+        color: rgb(151, 59, 59);
     }
 
 </style>
