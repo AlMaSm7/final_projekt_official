@@ -61,6 +61,9 @@ export default new Vuex.Store({
         },
         navigateHome(state) {
             state.acc = false
+        },
+        watch(state){
+            state.watch_video = true
         }
     },
     getters: {

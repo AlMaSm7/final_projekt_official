@@ -11,12 +11,11 @@ var ffmpeg = require('fluent-ffmpeg');
 
 const { v4: uuidv4 } = require('uuid');
 
-//kkkk
+
 let file_path
 let image_path
 let vid_length
 let full_path
-//hello
 
 ffmpeg.setFfprobePath('C:\\ffmpeg_module\\bin\\ffprobe.exe')
 
@@ -349,7 +348,6 @@ function get_Duration(file_path) {
     ffmpeg.ffprobe(file_path, function (err, metadata) {
       console.log('helloi')
       if (err) {
-        ///sconsole.log(file_path)
         console.log(err.message)
         return reject(err)
       } else {

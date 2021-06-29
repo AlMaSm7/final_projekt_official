@@ -2,7 +2,7 @@
   <div id="app">
     <login-register v-if="!user_here"/>
     <home v-if="user_here && !watchvideo && !acc" />
-    <player v-if="watchvideo" />
+    <player v-if="watchvideo" :key="videoSrcComputed"/>
     <userInfo v-if="acc"/>
   </div>
 </template>
@@ -35,7 +35,7 @@ export default {
       user: store.state.key, // this.CryptoJS.AES.decrypt(store.state.key, this.$key),
       username: store.state.username,
       watching: store.state.watch_video,
-    };
+    }
   },
   computed: {
     watchvideo: function () {
@@ -43,6 +43,9 @@ export default {
     },
     acc: function (){
       return store.state.acc
+    },
+    videoSrcComputed: function (){
+      return store.state.video
     }
   },
   methods: {

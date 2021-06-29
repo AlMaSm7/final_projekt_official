@@ -4,24 +4,24 @@
             <img src="../assets/logo_white_large.png" height="100px" width="100px" @click="leave()">
         </div>
         <div class="video_player">
-            <video :src="require(`../assets/VIDEOS/${video_src}`)" controls autoplay muted></video>
+            <video :src="require(`../assets/VIDEOS/${videoSrc}`)" controls autoplay muted></video>
             <div class="top5">
-                <div class="top5" v-for="trending in trending_videos" :key="trending">
+                <div class="top5" v-for="trending in trending_videos" :key="trending" @click="showVideo(trending.id)">
                     <figure>
-                        <img :src='require(`../assets/VIDEOS/${trending.thumbnail}`)' class="thumbnail" @click="showVideo(trending.id)"/><br>
+                        <img :src='require(`../assets/VIDEOS/${trending.thumbnail}`)' class="thumbnail" /><br>
                         <p>{{trending.title}}</p>
                         <p>Views: {{trending.views}}</p>
                         <p>{{trending.length}}</p>
                     </figure>
                 </div>
             </div>
-        </div>
+        </div>`
         <div class="content">
             <p class="title">{{title}}</p>
             <small>{{media_numbers[0].time}}</small>
             <p class="views">Views: {{media_numbers[0].views}}</p>
             <font-awesome-icon :icon="['fas', 'thumbs-up']" size="2x" class="like" @click="like(id, user_id)"/>
-            <p class="like_text">{{media_numbers[0].likes}} Likes</p>
+            <p class="like_text">{{likes}} Likes</p>
         </div>
         <div class="input_comments">
             <textarea type="text" v-model="comment" placeholder="Comment..." rows="1" cols="100" required></textarea>
@@ -36,6 +36,8 @@
 <script>
 import axios from 'axios'
 import store from '../store'
+import Vue from 'vue'
+
 
 export default {
     data() {
@@ -50,6 +52,14 @@ export default {
             likes: 0
         }
     },
+    computed: {
+        videoSrc: function(){
+            return store.state.video
+        },
+        allComments: function(){
+            return this.all_comments
+        }
+    },
     methods:{
         leave: function leave(){
             store.commit('setNull')
@@ -61,8 +71,8 @@ export default {
                 id
             }).then((Response) => {
                 console.log(Response.data)
-                this.watch = true
                 store.commit('showVideo',  {video: Response.data[0].path, title: Response.data[0].title, watch: true, video_id: id})
+                Vue.forceUpdate()
             }).catch((err) => {
                 console.log(err)
             })
