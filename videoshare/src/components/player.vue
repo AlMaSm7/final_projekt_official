@@ -36,8 +36,6 @@
 <script>
 import axios from 'axios'
 import store from '../store'
-import Vue from 'vue'
-
 
 export default {
     data() {
@@ -72,7 +70,6 @@ export default {
             }).then((Response) => {
                 console.log(Response.data)
                 store.commit('showVideo',  {video: Response.data[0].path, title: Response.data[0].title, watch: true, video_id: id})
-                Vue.forceUpdate()
             }).catch((err) => {
                 console.log(err)
             })

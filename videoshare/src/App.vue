@@ -3,7 +3,7 @@
     <login-register v-if="!user_here"/>
     <home v-if="user_here && !watchvideo && !acc" />
     <player v-if="watchvideo" :key="videoSrcComputed"/>
-    <userInfo v-if="acc"/>
+    <userInfo v-if="acc && !watchvideo"/>
   </div>
 </template>
 

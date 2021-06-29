@@ -1,11 +1,13 @@
 <template>
     <div class="container">
         <h2>My Videos</h2>
-        <div v-for="video in my_videos" :key="video" @click="showVideo(video.id)">
-            <img :src='require(`../assets/VIDEOS/${video.thumbnail}`)' class="thumbnail"/><br>
-            <p>{{video.title}}</p><br>
-            <p>Views: {{video.views}}</p>
-            <p>{{video.title}}</p>
+        <div class="myvids">
+            <div v-for="video in my_videos" :key="video" @click="showVideo(video.id)">
+                <img :src='require(`../assets/VIDEOS/${video.thumbnail}`)' class="thumbnail"/><br>
+                <p>{{video.title}}</p><br>
+                <p>Views: {{video.views}}</p>
+                <p>{{video.title}}</p>
+            </div>
         </div>
     </div>
 </template>
@@ -53,5 +55,31 @@ export default {
 </script>
 
 <style>
-
+    .thumbnail{
+        width: 300px;
+        height: 200px;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-content: space-between;
+        flex-flow: row wrap;
+    }
+    .logo{
+        display: flex;
+        margin-bottom: 50px;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .logo > img{
+        height: 155px;
+        width: 140px;
+    }
+    .myvids{
+        display: flex;
+        flex-direction: row;
+        flex-flow: row wrap;
+        justify-content: space-around;
+        gap: 69px;
+    }
 </style>

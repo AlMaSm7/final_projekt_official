@@ -11,11 +11,13 @@ import VueRouter from 'vue-router'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faThumbsUp } from '@fortawesome/free-solid-svg-icons'
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons'
+import { faUpload } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 
 library.add(faThumbsUp)
 library.add(faPaperPlane)
+library.add(faUpload)
 
 Vue.prototype.$key = '265f1a45-aa30-452b-a9de-a761f08d4a1a'
 

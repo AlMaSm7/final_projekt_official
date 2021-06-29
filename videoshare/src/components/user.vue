@@ -13,8 +13,8 @@
         </div>
         <div class="info_users">
             <user_info v-if="here_computed"/>
-            <myvideosVue v-if="myvids"/>
-            <liked-videos v-if="likedvids_computed"/>
+            <myvideosVue v-if="myvids && !watching_computed"/>
+            <liked-videos v-if="likedvids_computed && !watching_computed"/>
             <upload v-if="upload_computed"/>
         </div>
     </div>
@@ -54,6 +54,9 @@ export default {
         }, 
         upload_computed: function () {
             return this.upload_vid
+        },
+        watching_computed: function (){
+            return store.state.watch_video
         }
     },
     methods: {
@@ -89,20 +92,27 @@ export default {
 }
 </script>
 
-<style>s
+<style>
+    .user{
+        cursor: pointer;
+    }
     .navigation{
-        background: rgb(201, 4, 4);
-        
         cursor: pointer;
     }
     .nav{
         display: flex;
         flex-direction: column;
         align-items: flex-start;
+        margin-left: 75px;
     }
     .navigation > ul{
         cursor: pointer;
         color: rgb(226, 224, 224);
+    }
+    .logo{
+        display: flex;
+        align-items: flex-start;
+        flex-direction: column;
     }
 
 </style>

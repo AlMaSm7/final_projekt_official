@@ -11,8 +11,8 @@
 <script>
 import axios from 'axios';
 import Vue from "vue";
-import { bus } from "../main.js";
 import store from '../store.js';
+
 export default {
     name: "login",
     data() {
@@ -39,20 +39,11 @@ export default {
                     "97410df8-c866-11eb-b8bc-0242ac130003",
                     "1d"
                 )
-
-                //this.$rsa.setBit(1024)
-
-                //console.log(this.$key)
-                //console.log(Response.data[0].user_id)
                 let uid = Response.data[0].user_id
-                //  console.log(uid)
-                //let final_uid = this.$rsa.encrypt(uid)
-                //console.log(final_uid)
                 let uname = Response.data[0].username
-                console.log(uid)
+
                 store.commit('login', { username: uname, uid: uid })
                 console.log(store.state)
-                bus.$emit("cookieset", username)
             })
             .catch((error) => {
                 console.log(error);
