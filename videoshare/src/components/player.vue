@@ -261,7 +261,7 @@ export default {
         display: flex;
         margin-bottom: 50px;
         flex-direction: row;
-        justify-content: flex-start;
+        align-items: flex-start;
         margin-left: 100px;
     }
     .top5{

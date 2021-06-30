@@ -1,8 +1,6 @@
 <template>
     <div class="content">
-        <div class="title">
-            <h2>My Liked Videos</h2>
-        </div>
+    <h2>My Liked Videos</h2>
         <div class="liked">
             <div v-for="video in likedVideos" :key="video" @click="showVideo(video.id)">
                 <img :src='require(`../assets/VIDEOS/${video.thumbnail}`)' class="thumbnail"/><br>

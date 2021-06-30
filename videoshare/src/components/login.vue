@@ -2,9 +2,13 @@
     <div class="body_div">
         <div class="flex">
             <h2>Login</h2>
-            <input type="text" placeholder="Username..." v-model="username"/>
-            <input type="password" placeholder="Password..." v-model="password"/>
-            <button @click="login()" type="submit" value="submit">Submit</button>
+            <h4>PLEASE ACTIVATE COOKIES</h4>
+            <form v-on:submit.prevent="login">
+                <input type="text" placeholder="Username..." v-model="username" required/>
+                <input type="password" placeholder="Password..." v-model="password" required/>
+                <button type="submit" value="submit">Submit</button>
+            </form>
+            <p v-if="error" class="error">{{message}}</p>
         </div>
     </div>
 </template>
@@ -18,14 +22,18 @@ export default {
     data() {
         return {
             username: "",
-            password: ""
+            password: "",
+            error: false,
+            message: null
         }
     },
 
     
     methods: {
-        login: async function login() {
+        //Login to express api
+        login: function login() {
             const { username, password } = this;
+            console.log("Here")
             axios
             .post("http://localhost:3000/login", {
                 username,
@@ -33,7 +41,13 @@ export default {
             })
             .then((Response) => {
                 //console.log(Response);
-                console.log("no error");
+                //console.log("no error");
+                console.log(Response.data)
+                if(Response.data == "Something went Wrong, please try again."){
+                    this.error = true
+                    this.message = "Something went wrong, please try again"
+                }else{
+                this.error = false
                 Vue.$cookies.set(
                     username,
                     "97410df8-c866-11eb-b8bc-0242ac130003",
@@ -43,10 +57,11 @@ export default {
                 let uname = Response.data[0].username
 
                 store.commit('login', { username: uname, uid: uid })
-                console.log(store.state)
+                //  console.log(store.state)
+                }
             })
             .catch((error) => {
-                console.log(error);
+                console.log(error)
             })
         }   
     }
@@ -54,7 +69,7 @@ export default {
 </script>
 
 <style>
-    .flex{
+    .flex > form{
         display: flex;
         justify-content: center;
         align-items: center;
@@ -69,7 +84,7 @@ export default {
         width: 100vw;
         height: 30vh;
     }
-    .flex > button{
+    .flex > form> button{
         background-color: black;
         color: rgb(167, 167, 167);
         border: none;
@@ -81,7 +96,7 @@ export default {
     .flex > h2 {
         font-size: 60px;
     }
-    .flex >input{
+    .flex > form >input{
         background-color: rgb(31, 31, 31);
         border-radius: 5px;
         border: none;   
@@ -91,14 +106,17 @@ export default {
         height: 40px;
         color: rgb(167, 167, 167);
     }
-    .flex > input:focus{
+    .flex > form> input:focus{
         color: rgb(167, 167, 167);
         outline: none !important;
         border:1px solid rgb(46, 129, 43);
         box-shadow: 0 0 10px #719ECE;
     }
-    .flex > button:hover{
+    .flex > form > button:hover{
         color: rgb(221, 221, 221);
         background-color: rgb(46, 129, 43);
+    }
+    .error{
+        color: rgb(150, 47, 47);
     }
 </style>

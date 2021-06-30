@@ -2,9 +2,11 @@
     <div class="container">
         <div class="logo">
             <img src="../assets/logo_white_large.png" @click="goHome()" height="140px" width="100px" class="user">
+            <p>Logout</p>
+            <font-awesome-icon :icon="['fas', 'sign-out-alt']" size="3x" class="logout" @click="logout()"></font-awesome-icon>
         </div>
         <div class="logout">
-            <font-awesome-icon :icon="['fas', 'sign-out-alt']" size="3x" class="logout" @click="logout()"/>
+            
         </div>
         <div class="nav">
             <nav class="navigation">
@@ -118,8 +120,10 @@ export default {
     }
     .logo{
         display: flex;
-        align-items: flex-start;
+        justify-content: space-around;
+        align-items: space-around;
         flex-direction: column;
+        gap: 60px;
     }
     .logout{
         color: rgb(122, 122, 122);

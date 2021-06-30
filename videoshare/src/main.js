@@ -5,7 +5,6 @@ import UUID from "vue-uuid";
 import AsyncComputed from 'vue-async-computed'
 //vue plugins
 import Vuex from 'vuex'
-import VueRouter from 'vue-router'
 // import vueCrypt from 'vue-crypt'
 //Font-awsome icons
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -30,8 +29,6 @@ FontAwesomeIcon
 
 //Vue.component(FontAwesomeIcon)
 // Vue.use(vueCrypt)
-
-Vue.use(VueRouter)
 
 Vue.use(Vuex)
 

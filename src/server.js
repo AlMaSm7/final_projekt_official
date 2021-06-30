@@ -76,7 +76,7 @@ router.post('/register', async (req, res) => {
   console.log(query)
   con.query(query, (error, results, fields) => {
     if (error) {
-      return console.error(error.message)
+      res.send("Something went Wrong, please try again.")
     } else {
       console.log(results)
       res.send(results)
@@ -103,7 +103,7 @@ router.post('/login', async (req, res) => {
       return console.error(error.message)
     } else if (results.length == 0) {
       console.log(results)
-      return console.log('WRONG')
+      res.send("Something went Wrong, please try again.")
     } else {
       console.log(results)
       res.send(results)

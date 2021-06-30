@@ -39,7 +39,7 @@ export default {
   },
   computed: {
     watchvideo: function () {
-      return store.state.watch_video;
+      return store.state.watch_video
     },
     acc: function (){
       return store.state.acc
@@ -51,35 +51,35 @@ export default {
   methods: {
     logged_in: function () {
       return new Promise((resolve, reject) => {
-        let cookie = Vue.$cookies.get(store.state.username);
-        console.log(cookie);
+        let cookie = Vue.$cookies.get(store.state.username)
+        console.log(cookie)
         if (cookie != null) {
-          resolve("Session Found");
+          resolve("Session Found")
         } else {
-          reject("No Session Found");
+          reject("No Session Found")
         }
-      });
+      })
     },
   },
   asyncComputed: {
     created() {
-      console.log(this.user);
-      console.log(this.username);
+      console.log(this.user)
+      console.log(this.username)
       this.logged_in()
         .then((result) => {
-          console.log(result);
-          this.user_here = true;
+          console.log(result)
+          this.user_here = true
           //store.commit('setNull')
         })
         .catch((err) => {
           console.log(err);
           this.user_here = false;
-          store.commit("logout");
-          store.commit("setNull");
+          store.commit("logout")
+          store.commit("setNull")
         });
     },
   },
-};
+}
 </script>
 
 <style>
