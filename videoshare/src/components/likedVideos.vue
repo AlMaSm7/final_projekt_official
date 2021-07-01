@@ -1,6 +1,6 @@
 <template>
-    <div class="content">
-    <h2>My Liked Videos</h2>
+    <div class="container">
+        <h2>My Liked Videos</h2>
         <div class="liked">
             <div v-for="video in likedVideos" :key="video" @click="showVideo(video.id)">
                 <img :src='require(`../assets/VIDEOS/${video.thumbnail}`)' class="thumbnail"/><br>
@@ -22,6 +22,7 @@ export default {
         }
     },
     methods: {
+        //api request to liked videos, gets stored in array
         getLikedVideos: function getLikedVideos(id){
             axios.post("http://localhost:3000/likedVideos", {
                 id
@@ -35,6 +36,7 @@ export default {
                 console.log(err)
             })
         },
+        //Shows the video if clicked
         showVideo: function showVideo(id){
             console.log("here")
             console.log(id)

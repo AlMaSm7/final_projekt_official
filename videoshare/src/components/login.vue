@@ -82,7 +82,7 @@ export default {
         align-items: center;
         justify-content: center;
         width: 100vw;
-        height: 30vh;
+        height: 40vh;
     }
     .flex > form> button{
         background-color: black;

@@ -102,7 +102,7 @@ export default {
   align-items: center;
   justify-content: center;
   width: 100vw;
-  height: 45vh;
+  height: 65vh;
 }
 .register > form {
   display: flex;

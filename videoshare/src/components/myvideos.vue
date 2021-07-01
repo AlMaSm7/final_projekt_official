@@ -24,6 +24,7 @@ export default {
         }
     },
     methods: {
+        //Gets the videos the User uploaded
         getmyVideos: function getMyVideos(user_id){
             axios.post("http://localhost:3000/getUserVideos", {
                 user_id

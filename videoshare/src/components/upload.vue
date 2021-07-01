@@ -48,19 +48,24 @@ export default {
     };
   },
   methods: {
+    //This is to handle the file(If values change (NO VUE MODEL ALLOWED IN INPUT FILE!!!!!)
     handleFile: async function handleFile() {
       console.log(this.$refs)
       this.thumbnail = this.$refs.thumbnail.files[0]
       this.video = this.$refs.video.files[0]
     },
-    upload: async function upload() {
+
+    upload:  function upload() {
+      //Uploads Data with Fromdata
       let formdata = new FormData()
 
-      this.$refs.files.reset()
       formdata.append("video", this.video)
       formdata.append("thumbnail", this.thumbnail)
       formdata.append("title", this.title)
       formdata.append("user_id", store.state.key)
+      this.video = null
+      this.thumbnail = null
+      this.title = ""
 
       for (var key of formdata.entries()) {
         console.log(key[0] + ", " + key[1])
@@ -75,15 +80,11 @@ export default {
         })
         .then(function () {
           console.log("Nodejs working now");
-          this.$refs.thumbnail.reset()
-          this.$refs.video.reset()
-          this.title = ""
-          this.error = null
         })
         .catch((error) => {
           console.log(error)
-          this.error = "Something went wrong, please try again"
-        });
+          this.error = "Something went wrong, please try again allowed Files are mp4, png, mpeg, tiff, jpeg"
+        })
     },
   },
 }

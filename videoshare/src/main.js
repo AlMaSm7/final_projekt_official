@@ -14,7 +14,7 @@ import { faUpload } from '@fortawesome/free-solid-svg-icons'
 import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
-
+//All the font awesome icons
 library.add(faSignOutAlt)
 library.add(faThumbsUp)
 library.add(faPaperPlane)
@@ -27,13 +27,11 @@ Vue.component('font-awesome-icon', FontAwesomeIcon)
 library
 FontAwesomeIcon
 
-//Vue.component(FontAwesomeIcon)
-// Vue.use(vueCrypt)
 
+//Import all vue librarys/modules
 Vue.use(Vuex)
 
 Vue.use(AsyncComputed)
-
 
 Vue.use(UUID);
 
@@ -42,7 +40,7 @@ Vue.use(VueCookies)
 Vue.config.productionTip = false
 
 export const bus = new Vue();
-
+//Instance of Vuejs
 new Vue({
   render: h => h(App),
 }).$mount('#app')

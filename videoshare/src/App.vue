@@ -50,6 +50,7 @@ export default {
   },
   methods: {
     logged_in: function () {
+      //New Promise to check if cookie exists with a promise
       return new Promise((resolve, reject) => {
         let cookie = Vue.$cookies.get(store.state.username)
         console.log(cookie)
@@ -62,6 +63,7 @@ export default {
     },
   },
   asyncComputed: {
+    //Repeats Method everytime Values change with localstorage
     created() {
       console.log(this.user)
       console.log(this.username)
