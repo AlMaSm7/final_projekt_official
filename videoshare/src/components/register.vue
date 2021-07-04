@@ -29,7 +29,7 @@
           v-model="password"
           required
         />
-        <button @click="register()" type="submit" value="submit">Submit</button>
+        <button type="submit" value="submit">Submit</button>
       </form>
       <p v-if="message">{{ message }}</p>
     </div>
@@ -54,44 +54,40 @@ export default {
     };
   },
   methods: {
-    register: async function register() {
+    register: function register() {
       const { username, password, firstname, lastname, email } = this;
-      if (this.password != "" && this.username != "") {
-        axios
-          .post("http://localhost:3000/register", {
+      axios
+        .post("http://localhost:3000/register", {
+          username,
+          password,
+          firstname,
+          lastname,
+          email,
+        })
+        .then((Response) => {
+          console.log(Response.data.insertId);
+          //console.log("no error");
+          Vue.$cookies.set(
             username,
-            password,
-            firstname,
-            lastname,
-            email,
-          })
-          .then((Response) => {
-            console.log(Response.data.insertId);
-            //console.log("no error");
-            Vue.$cookies.set(
-              username,
-              "97410df8-c866-11eb-b8bc-0242ac130003",
-              "1d"
-            );
-            /*Vue.prototype.$userId = Response.data.insertId
+            "97410df8-c866-11eb-b8bc-0242ac130003",
+            "1d"
+          );
+          /*Vue.prototype.$userId = Response.data.insertId
           Vue.prototype.$username = username*/
-            let uid = Response.data.insertId;
-            console.log(Response.data.insertId);
-            store.commit("login", { username: username, uid: uid });
-            //store.state.user_id = Response.data.insertId
-          })
-          .catch((error) => {
-            console.log(error)
-            this.message = "Something went wrong, please try again"
-          });
-      } else {
-        this.message = "Something went wrong, please try again"
-      }
+          let uid = Response.data.insertId;
+          console.log(Response.data.insertId);
+          store.commit("login", { username: username, uid: uid });
+          //store.state.user_id = Response.data.insertId
+        })
+        .catch((error) => {
+          console.log(error);
+          this.message = "Something went wrong, please try again";
+        })
     },
   },
   beforeMount() {
     //this.error = false
-    this.message = ""
+    this.message = "";
   },
 };
 </script>

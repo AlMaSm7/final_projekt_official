@@ -42,6 +42,7 @@ export default new Vuex.Store({
             state.video_id = null
             state.acc = null
             state.title = null
+            console.log(state.key)
             console.log(state)
         },
         showVideo(state, data) {
@@ -53,13 +54,6 @@ export default new Vuex.Store({
             state.title = data.title
             state.video_id = data.video_id
             console.log(state)
-        },
-        setNull(state) {
-            console.log(state)
-            state.watch_video = null
-            state.video = null
-            state.title = null
-            state.acc = null
         },
         goToAcc(state) {
             state.acc = true
