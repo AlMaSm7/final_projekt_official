@@ -57,7 +57,7 @@ export default {
 
 <style>
     .thumbnail{
-        width: 300px;
+        width: 250px;
         height: 200px;
         cursor: pointer;
         display: flex;

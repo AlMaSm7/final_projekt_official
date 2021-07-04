@@ -6,26 +6,26 @@
       <form v-on:submit.prevent="register">
         <input
           type="text"
-          placeholder="Username..."
+          placeholder="*Username..."
           v-model="username"
           required
         />
         <input
           type="text"
-          placeholder="Firstname..."
+          placeholder="*Firstname..."
           v-model="firstname"
           required
         />
         <input
           type="text"
-          placeholder="Lastname..."
+          placeholder="*Lastname..."
           v-model="lastname"
           required
         />
-        <input type="email" placeholder="Email..." v-model="email" required />
+        <input type="email" placeholder="*Email..." v-model="email" required />
         <input
           type="password"
-          placeholder="Password..."
+          placeholder="*Password..."
           v-model="password"
           required
         />
@@ -58,6 +58,7 @@ export default {
   methods: {
     register: async function register() {
       const { username, password, firstname, lastname, email } = this;
+      if(this.password != "" && this.username != ""){
       axios
         .post("http://localhost:3000/register", {
           username,
@@ -87,7 +88,11 @@ export default {
           console.log(error);
           this.error = true;
           this.message = "Something went wrong, please try again";
-        });
+        })
+      } else {
+        this.error = true;
+          this.message = "Something went wrong, please try again";
+      }
     },
   },
 };

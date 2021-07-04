@@ -2,8 +2,11 @@
     <div class="container">
         <div class="logo">
             <img src="../assets/logo_white_large.png" @click="goToAcc()" class="user">
+            
         </div>
+        <h1>TheTube</h1><br>
         <div class="thumbnails">
+            
             <div v-for="foto in thumbnails" :key="foto" @click="showVideo(foto.id)">
                 <figure>
                     <img :src='require(`../assets/VIDEOS/${foto.thumbnail}`)' class="thumbnail"/><br>
@@ -67,7 +70,7 @@ export default {
 
 <style>
     .thumbnail{
-        width: 300px;
+        width: 250px;
         height: 200px;
         cursor: pointer;
         display: flex;

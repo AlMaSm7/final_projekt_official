@@ -19,8 +19,9 @@ let image_path
 let vid_length
 let full_path
 let testpath
+//Joins the the Absolute path of the file struktur with the relativ one 
 var relativePath = path.join(__dirname, '..\\videoshare\\src\\assets\\VIDEOS')
-
+//Path for ffprobe
 ffmpeg.setFfprobePath('C:\\ffmpeg_module\\bin\\ffprobe.exe')
 
 

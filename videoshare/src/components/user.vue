@@ -5,9 +5,6 @@
             <p>Logout</p>
             <font-awesome-icon :icon="['fas', 'sign-out-alt']" size="3x" class="logout" @click="logout()"></font-awesome-icon>
         </div>
-        <div class="logout">
-            
-        </div>
         <div class="nav">
             <nav class="navigation">
                 <ul @click="change()">User Info</ul>
@@ -117,20 +114,24 @@ export default {
     .navigation > ul{
         cursor: pointer;
         color: rgb(226, 224, 224);
+        transition: 0.7s;
     }
     .logo{
         display: flex;
         justify-content: space-around;
-        align-items: space-around;
-        flex-direction: column;
+        align-content: space-around;
         gap: 60px;
     }
     .logout{
         color: rgb(122, 122, 122);
-        transition: 0.7s;
+        transition: 0.3s;
     }
     .logout:hover{
         color: rgb(151, 59, 59);
+    }
+    .navigation > ul:hover{
+        font-weight: bold;
+        color: rgb(72, 124, 42);
     }
 
 </style>

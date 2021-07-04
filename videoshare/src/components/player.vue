@@ -60,9 +60,11 @@ export default {
     },
     methods:{
         leave: function leave(){
+            //Goes back to Homepage
             store.commit('setNull')
         },
         showVideo: function showVideo(id){
+            //Shows trending video if clicked
             console.log("here")
             console.log(id)
             axios.post("http://localhost:3000/getVideo", {
@@ -75,7 +77,9 @@ export default {
             })
         },
         handle_comment: function handle_comment(id, user_id){
+            //Handle new input of comment, calls get comments again
             const {comment} = this;
+            console.log(this.user_id)
             axios.post('http://localhost:3000/comment', {
                 id,
                 user_id,
@@ -135,17 +139,10 @@ export default {
                 console.log(this.trending_videos)
             })
         },
-        /*calculateTime: function calculateTime(time){
-            let minutes = Math.floor(time / 60)
-            let seconds = Math.floor(time % 60)
-            if (seconds < 10) {
-                seconds = '0' + seconds;
-            }   
-            let final_time = minutes + ':' + seconds
-            return final_time
-        }*/
     },
     beforeMount() {
+        //This is what happens before the mounting
+        console.log(store.state)
         this.video_src = store.state.video
         this.title = store.state.title
         this.id = store.state.video_id
