@@ -22,7 +22,8 @@ export default {
         
     },
     mounted() {
-        const { user_id } = this;
+        const { user_id } = this
+        console.log(store.state.key)
         axios.post("http://localhost:3000/users", {
             user_id
         }).then((Response) => {

@@ -39,7 +39,6 @@
 import Vue from "vue";
 import axios from "axios";
 import store from "../store";
-
 export default {
   name: "register",
   store,
@@ -58,40 +57,38 @@ export default {
   methods: {
     register: async function register() {
       const { username, password, firstname, lastname, email } = this;
-      if(this.password != "" && this.username != ""){
-      axios
-        .post("http://localhost:3000/register", {
-          username,
-          password,
-          firstname,
-          lastname,
-          email,
-        })
-        .then((Response) => {
-          console.log(Response.data.insertId);
-          //console.log("no error");
-          this.error = false;
-          Vue.$cookies.set(
+      if (this.password != "" && this.username != "") {
+        axios
+          .post("http://localhost:3000/register", {
             username,
-            "97410df8-c866-11eb-b8bc-0242ac130003",
-            "1d"
-          );
-          /*Vue.prototype.$userId = Response.data.insertId
+            password,
+            firstname,
+            lastname,
+            email,
+          })
+          .then((Response) => {
+            console.log(Response.data.insertId);
+            //console.log("no error");
+            Vue.$cookies.set(
+              username,
+              "97410df8-c866-11eb-b8bc-0242ac130003",
+              "1d"
+            );
+            /*Vue.prototype.$userId = Response.data.insertId
           Vue.prototype.$username = username*/
-          let uid = Response.data.insertId;
-          console.log(Response.data.insertId);
-          store.commit("login", { username: username, uid: uid });
-
-          //store.state.user_id = Response.data.insertId
-        })
-        .catch((error) => {
-          console.log(error);
-          this.error = true;
-          this.message = "Something went wrong, please try again";
-        })
+            let uid = Response.data.insertId;
+            console.log(Response.data.insertId);
+            store.commit("login", { username: username, uid: uid });
+            //store.state.user_id = Response.data.insertId
+          })
+          .catch((error) => {
+            console.log(error);
+            this.error = true;
+            this.message = "Something went wrong, please try again";
+          });
       } else {
         this.error = true;
-          this.message = "Something went wrong, please try again";
+        this.message = "Something went wrong, please try again";
       }
     },
   },
@@ -107,7 +104,7 @@ export default {
   align-items: center;
   justify-content: center;
   width: 100vw;
-  height: 65vh;
+  height: 45vh;
 }
 .register > form {
   display: flex;

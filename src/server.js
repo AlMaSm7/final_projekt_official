@@ -88,6 +88,7 @@ router.post('/register', async (req, res) => {
   let password_hashed = hash.digest('hex')
 
   let query = 'INSERT INTO users(username, password, firstname, lastname, email) VALUES (' + con.escape(data_user.username) + ',' + con.escape(password_hashed) + ',' + con.escape(data_user.firstname) + ',' + con.escape(data_user.lastname) + ',' + con.escape(data_user.email) + ');'
+  let query2 = 'SELECT user_id'
 
   console.log(query)
   con.query(query, (error, results, fields) => {

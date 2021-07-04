@@ -1,4 +1,3 @@
-
 import Vue from 'vue'
 import Vuex from 'vuex'
 import createPersistedState from "vuex-persistedstate"
@@ -9,7 +8,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     state: {
-        key: "",
+        key: 0,
         username: "",
         watch_video: false,
         video: "",
@@ -32,17 +31,18 @@ export default new Vuex.Store({
             console.log(data.uid)
             state.key = data.uid
             state.username = data.username
+            console.log(state.key)
             console.log(state)
         },
         logout(state) {
-            console.log(state)
-            state.key = null
+            state.key = 0
             state.username = null
             state.watch_video = null
             state.video = null
             state.video_id = null
             state.acc = null
             state.title = null
+            console.log(state)
         },
         showVideo(state, data) {
             console.log(data.video)
