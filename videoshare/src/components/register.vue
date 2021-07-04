@@ -31,7 +31,7 @@
         />
         <button @click="register()" type="submit" value="submit">Submit</button>
       </form>
-      <p v-if="error">{{ message }}</p>
+      <p v-if="message">{{ message }}</p>
     </div>
   </div>
 </template>
@@ -50,7 +50,6 @@ export default {
       lastName: "",
       age: "",
       address: "",
-      error: false,
       message: null,
     };
   },
@@ -82,15 +81,17 @@ export default {
             //store.state.user_id = Response.data.insertId
           })
           .catch((error) => {
-            console.log(error);
-            this.error = true;
-            this.message = "Something went wrong, please try again";
+            console.log(error)
+            this.message = "Something went wrong, please try again"
           });
       } else {
-        this.error = true;
-        this.message = "Something went wrong, please try again";
+        this.message = "Something went wrong, please try again"
       }
     },
+  },
+  beforeMount() {
+    //this.error = false
+    this.message = ""
   },
 };
 </script>
