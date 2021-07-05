@@ -29,7 +29,7 @@
       required
       />
 
-      <button type="submit" v-on:click="upload()">Submit</button>
+      <button type="submit">Submit</button>
     </form>
     <p v-if="error">{{error}}</p>
     </div>
@@ -49,7 +49,7 @@ export default {
   },
   methods: {
     //This is to handle the file(If values change (NO VUE MODEL ALLOWED IN INPUT FILE!!!!!)
-    handleFile: async function handleFile() {
+    handleFile: function handleFile() {
       console.log(this.$refs)
       this.thumbnail = this.$refs.thumbnail.files[0]
       this.video = this.$refs.video.files[0]
